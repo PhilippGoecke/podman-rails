@@ -1,7 +1,7 @@
 #FROM ruby:3.0
 FROM docker.io/ruby:3.0
 
-#RUN apt install libsqlite3-dev
+RUN apt install -y mariadb-client libmariadb-dev
 
 WORKDIR /usr/src/app
 
@@ -9,7 +9,8 @@ RUN bundle init \
   && bundle add rails \
   && bundle install
 
-RUN bundle exec rails new . --force --skip-git --database=sqlite3 --minimal
+#RUN bundle exec rails new . --force --skip-git --database=sqlite3 --minimal
+RUN bundle exec rails new . --force --skip-git --database=mysql --minimal --javascript=webpack --css=bootstrap --asset-pipeline=sprockets
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
