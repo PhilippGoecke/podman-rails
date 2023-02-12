@@ -1,7 +1,11 @@
 #FROM ruby:3.0
 FROM docker.io/ruby:3.0
 
-RUN apt install -y mariadb-client libmariadb-dev
+RUN apt update \
+  && apt upgrade -y \
+  && apt install -y --no-install-recommends mariadb-client libmariadb-dev \
+  && rm -rf "/var/lib/apt/lists/*" \
+  && rm -rf /var/cache/apt/archives
 
 WORKDIR /usr/src/app
 
