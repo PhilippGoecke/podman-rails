@@ -1,11 +1,30 @@
 #FROM ruby:3.0
 FROM docker.io/ruby:3.0
 
+SHELL ["/bin/bash", "-c"]
+
 RUN apt update \
   && apt upgrade -y \
+  # DB dependencies
   && apt install -y --no-install-recommends libmariadb-dev \
+  # Node dependencies
+  && apt install -y --no-install-recommends curl build-essential libssl-dev \
   && rm -rf "/var/lib/apt/lists/*" \
   && rm -rf /var/cache/apt/archives
+
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 18.14.0
+RUN mkdir $NVM_DIR \
+  && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash \
+  && source $NVM_DIR/nvm.sh \
+  && nvm --version \
+  #&& nvm install $NODE_VERSION \
+  #&& nvm alias default $NODE_VERSION \
+  #&& nvm use default
+  && nvm install --lts \
+  && npm --version \
+  && npm install --global yarn \
+  && yarn --version
 
 WORKDIR /usr/src/app
 
