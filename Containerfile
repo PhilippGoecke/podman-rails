@@ -3,7 +3,7 @@ FROM docker.io/ruby:3.0
 
 RUN apt update \
   && apt upgrade -y \
-  && apt install -y --no-install-recommends mariadb-client libmariadb-dev \
+  && apt install -y --no-install-recommends libmariadb-dev \
   && rm -rf "/var/lib/apt/lists/*" \
   && rm -rf /var/cache/apt/archives
 
