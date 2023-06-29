@@ -15,13 +15,13 @@ RUN apt update \
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 20.3.1
 RUN mkdir $NVM_DIR \
-  && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash \
+  && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
   && source $NVM_DIR/nvm.sh \
   && nvm --version \
-  #&& nvm install $NODE_VERSION \
-  #&& nvm alias default $NODE_VERSION \
-  #&& nvm use default
-  && nvm install --lts \
+  && nvm install $NODE_VERSION \
+  && nvm alias default $NODE_VERSION \
+  && nvm use default
+  #&& nvm install --lts \
   && npm --version \
   && npm install --global yarn \
   && yarn --version
