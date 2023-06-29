@@ -1,5 +1,5 @@
-#FROM ruby:3.0
-FROM docker.io/ruby:3.0
+#FROM ruby:3.1
+FROM docker.io/ruby:3.1
 
 SHELL ["/bin/bash", "-c"]
 
@@ -13,7 +13,7 @@ RUN apt update \
   && rm -rf /var/cache/apt/archives
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 18.16.1
+ENV NODE_VERSION 20.3.1
 RUN mkdir $NVM_DIR \
   && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash \
   && source $NVM_DIR/nvm.sh \
@@ -29,7 +29,9 @@ ENV PATH "$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH"
 
 WORKDIR /usr/src/app
 
-RUN bundle init \
+RUN ruby -v \
+  && bundler --version \
+  && bundle init \
   && bundle add rails \
   && bundle install
 
