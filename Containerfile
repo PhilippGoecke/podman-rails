@@ -25,6 +25,7 @@ RUN mkdir $NVM_DIR \
   && npm --version \
   && npm install --global yarn \
   && yarn --version
+ENV PATH "$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH"
 
 WORKDIR /usr/src/app
 
