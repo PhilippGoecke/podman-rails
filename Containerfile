@@ -18,9 +18,10 @@ RUN mkdir $NVM_DIR \
   && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
   && source $NVM_DIR/nvm.sh \
   && nvm --version \
+  && nvm ls-remote \
   && nvm install $NODE_VERSION \
   && nvm alias default $NODE_VERSION \
-  && nvm use default
+  && nvm use default \
   #&& nvm install --lts \
   && npm --version \
   && npm install --global yarn \
